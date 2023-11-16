@@ -1,0 +1,17 @@
+﻿<Window x:Class="Spray_Paint_Application.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Spray_Paint_Application"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TextBlock Text="Select a message option and then choose the Display button." 
+                   TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,169,0,0"/>
+        <RadioButton x:Name="HelloButton" Content="RadioButton" HorizontalAlignment="Left" Margin="238,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.692,1.112" IsChecked="True"/>
+        <RadioButton x:Name="GoodbyeButton" Content="RadioButton" HorizontalAlignment="Left" Margin="477,0,0,0" VerticalAlignment="Center"/>
+        <Button Content="Display" HorizontalAlignment="Center" Margin="0,241,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.146,-0.108" Click="Button_Click"/>
+
+    </Grid>
+</Window>
