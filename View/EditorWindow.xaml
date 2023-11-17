@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Spray_Paint_Application.View"
         mc:Ignorable="d"
-        Title="Spray Paint Application" Height="768" Width="1024" WindowState="Maximized">
+        Title="Spray Paint Application" Height="768" Width="1024" WindowState="Maximized"
+        Icon="pack://application:,,,/Resources/spray-paint.ico">
     <Grid>
         
     </Grid>
