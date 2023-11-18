@@ -49,7 +49,7 @@ namespace Spray_Paint_Application.ViewModel
         public LoginViewModel()
         {
             LoadImageCommand = new RelayCommand(LoadImage);
-            OpenEditorCommand = new RelayCommand(OpenEditor, CanOpenEditor);
+            OpenEditorCommand = new RelayCommand(OpenEditor, () => CanOpenEditor());
         }
 
         protected virtual void OnPropertyChanged(string propertyName)
@@ -72,18 +72,25 @@ namespace Spray_Paint_Application.ViewModel
             {
                 ImageBorderVisibility = Visibility.Collapsed;
             }
-
+            (OpenEditorCommand as RelayCommand)?.RaiseCanExecuteChanged();
         }
-
-        private bool CanOpenEditor()
+        
+        private Boolean CanOpenEditor()
         {
             return ImageData.Photo != null;
         }
 
         private void OpenEditor()
         {
-            EditorWindow editorWindow = new EditorWindow(ImageData.Photo);
-            editorWindow.Show();
+            if (ImageData.Photo != null)
+            {
+                EditorWindow editorWindow = new EditorWindow(ImageData.Photo);
+                editorWindow.Show();
+            } else
+            {
+                MessageBox.Show("Please load image before continuing.", "Loading Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
 
     }
