@@ -1,0 +1,90 @@
+﻿using GalaSoft.MvvmLight.Command;
+using Microsoft.Win32;
+using Spray_Paint_Application.Model;
+using Spray_Paint_Application.View;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media.Imaging;
+
+namespace Spray_Paint_Application.ViewModel
+{
+    public class LoginViewModel : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        private ImageModel _imageData = new ImageModel();
+        public ImageModel ImageData
+        {
+            get => _imageData;
+            set
+            {
+                _imageData = value;
+                OnPropertyChanged(nameof(ImageData));
+            }
+        }
+
+        private Visibility _imageBorderVisibility = Visibility.Collapsed;
+        public Visibility ImageBorderVisibility
+        {
+            get => _imageBorderVisibility;
+            set
+            {
+                if (_imageBorderVisibility != value)
+                {
+                    _imageBorderVisibility = value;
+                    OnPropertyChanged(nameof(ImageBorderVisibility));
+                }
+            }
+        }
+
+        public ICommand LoadImageCommand { get; }
+        public ICommand OpenEditorCommand { get; }
+
+        public LoginViewModel()
+        {
+            LoadImageCommand = new RelayCommand(LoadImage);
+            OpenEditorCommand = new RelayCommand(OpenEditor, CanOpenEditor);
+        }
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void LoadImage()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Select an image";
+            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg;*.bmp)|*.png;*.jpeg;*.jpg;*.bmp|All files (*.*)|*.*";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                BitmapImage bitmap = new BitmapImage(new Uri(openFileDialog.FileName));
+                ImageData.Photo = bitmap;
+                ImageBorderVisibility = Visibility.Visible;
+            } else
+            {
+                ImageBorderVisibility = Visibility.Collapsed;
+            }
+
+        }
+
+        private bool CanOpenEditor()
+        {
+            return ImageData.Photo != null;
+        }
+
+        private void OpenEditor()
+        {
+            EditorWindow editorWindow = new EditorWindow(ImageData.Photo);
+            editorWindow.Show();
+        }
+
+    }
+}

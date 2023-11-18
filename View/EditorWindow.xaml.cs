@@ -19,7 +19,7 @@ namespace Spray_Paint_Application.View
     /// </summary>
     public partial class EditorWindow : Window
     {
-        public EditorWindow()
+        public EditorWindow(ImageSource photo)
         {
             InitializeComponent();
         }

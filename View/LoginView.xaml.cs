@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Spray_Paint_Application.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,42 +24,7 @@ namespace Spray_Paint_Application.View
         public LoginView()
         {
             InitializeComponent();
-        }
-
-        private void LoadImage_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Title = "Select an image";
-            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg;*.bmp)|*.png;*.jpeg;*.jpg;*.bmp|All files (*.*)|*.*";
-
-            if (openFileDialog.ShowDialog() == true)
-            {
-                // Load the image
-                BitmapImage bitmap = new BitmapImage(new Uri(openFileDialog.FileName));
-                PreviewImage.Source = bitmap;
-            }
-            BorderVisibility();
-        }
-
-        private void BorderVisibility()
-        {
-            if (PreviewImage.Source != null)
-            {
-                ImageBorder.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void OpenEditorButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (PreviewImage.Source== null)
-            {
-                MessageBox.Show("Please load image before continuing.", "Loading Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
-            } else
-            {
-                EditorWindow editorWindow = new EditorWindow();
-                editorWindow.Show();
-            }
+            DataContext = new LoginViewModel();
         }
     }
 }
