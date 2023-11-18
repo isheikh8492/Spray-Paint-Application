@@ -4,6 +4,25 @@
              xmlns:local="clr-namespace:Spray_Paint_Application"
              StartupUri="View/LoginView.xaml">
     <Application.Resources>
-         
+        <Style x:Key="VerticalMenuSeparatorStyle" TargetType="{x:Type Separator}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Separator}">
+                        <Border Width="1" Margin="3" Background="DarkGray" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="Width" Value="Auto"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Parent.Orientation, RelativeSource={RelativeSource Self}}" Value="Horizontal">
+                    <Setter Property="LayoutTransform">
+                        <Setter.Value>
+                            <RotateTransform Angle="90"/>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Application.Resources>
 </Application>

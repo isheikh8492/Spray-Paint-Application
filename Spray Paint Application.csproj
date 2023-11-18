@@ -9,15 +9,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\redoarrow.ico" />
+    <None Remove="Resources\save.ico" />
     <None Remove="Resources\spray-paint.ico" />
+    <None Remove="Resources\undoarrow.ico" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+    <PackageReference Include="SharpVectors" Version="1.8.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\redoarrow.ico" />
+    <Resource Include="Resources\save.ico" />
     <Resource Include="Resources\spray-paint.ico" />
+    <Resource Include="Resources\undoarrow.ico" />
   </ItemGroup>
 
 </Project>

@@ -22,6 +22,7 @@ namespace Spray_Paint_Application.View
         public EditorWindow(ImageSource photo)
         {
             InitializeComponent();
+            EditableImage.Source = photo;
         }
     }
 }

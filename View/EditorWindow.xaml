@@ -7,7 +7,62 @@
         mc:Ignorable="d"
         Title="Spray Paint Application" Height="768" Width="1024" WindowState="Maximized"
         Icon="pack://application:,,,/Resources/spray-paint.ico">
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <DockPanel LastChildFill="True" Grid.Row="0">
+            <Menu DockPanel.Dock="Top" Background="LightGray" Padding="5,5">
+                <MenuItem Header="File" Padding="10 5" >
+                    <MenuItem Header="New" Command="{Binding NewCommand}"/>
+                    <MenuItem Header="Open" Command="{Binding OpenCommand}"/>
+                    <MenuItem Header="Save As" Command="{Binding SaveCommand}"/>
+                </MenuItem>
+                
+                <MenuItem Header="View" Padding="10 5" >
+                    <MenuItem Header="Zoom In" Command="{Binding ZoomInCommand}"/>
+                    <MenuItem Header="Zoom Out" Command="{Binding ZoomOutCommand}"/>
+                    <!-- Other View commands -->
+                </MenuItem>
+                <Separator Style="{StaticResource VerticalMenuSeparatorStyle}" />
+                <MenuItem Width="24" Padding="10,5" Margin="2.5,0">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Resources/save.ico" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator Style="{StaticResource VerticalMenuSeparatorStyle}" />
+                <MenuItem Width="24" Padding="10,5" Margin="2.5,0">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Resources/undoarrow.ico" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Width="24" Padding="10,5" Margin="2.5,0">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Resources/redoarrow.ico" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </Menu>
+            <!-- Tool Panel -->
+            <StackPanel DockPanel.Dock="Top" Background="#FFE6E6E6" HorizontalAlignment="Center" Width="200">
+                <Label Content="Brush Size" />
+                <Slider x:Name="BrushSizeSlider" Minimum="1" Maximum="50" Value="10" TickFrequency="1" IsSnapToTickEnabled="True" />
+                <Label Content="Brush Color" />
+                <ComboBox x:Name="ColorPicker">
+                    <ComboBoxItem Content="Black" />
+                    <ComboBoxItem Content="Red" />
+                    <ComboBoxItem Content="Green" />
+                    <ComboBoxItem Content="Blue" />
+                    <!-- Add more colors as needed -->
+                </ComboBox>
+                <!-- Add more tools as needed -->
+            </StackPanel>
+        </DockPanel>
+        <!-- Canvas to draw on -->
+        <Canvas Grid.Row="1" x:Name="PaintCanvas" Background="Transparent" ClipToBounds="True">
+            <Image x:Name="EditableImage" Stretch="UniformToFill" />
+        </Canvas>
     </Grid>
 </Window>

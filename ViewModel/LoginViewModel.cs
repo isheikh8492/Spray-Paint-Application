@@ -84,7 +84,9 @@ namespace Spray_Paint_Application.ViewModel
         {
             if (ImageData.Photo != null)
             {
+                var loginWindow = Application.Current.Windows.OfType<LoginView>().FirstOrDefault();
                 EditorWindow editorWindow = new EditorWindow(ImageData.Photo);
+                loginWindow?.Close();
                 editorWindow.Show();
             } else
             {
