@@ -23,6 +23,7 @@ namespace Spray_Paint_Application.View
         {
             InitializeComponent();
             EditableImage.Source = photo;
+            DataContext = new ColorViewModel();
         }
     }
 }
