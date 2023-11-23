@@ -3,27 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Spray_Paint_Application.View"
+        xmlns:local="clr-namespace:Spray_Paint_Application.ViewModel"
         xmlns:model="clr-namespace:Spray_Paint_Application.Model"
         xmlns:xctk="http://schemas/xceed.com/wpf/xaml/toolkit"
-        xmlns:converter="clr-namespace:Spray_Paint_Application.Converter" d:DataContext="{d:DesignInstance Type=local:ColorViewModel}"
+        xmlns:colorviewmodel="clr-namespace:Spray_Paint_Application.ViewModel" d:DataContext="{d:DesignInstance Type=local:ColorViewModel}"
         mc:Ignorable="d"
         Title="Spray Paint Application" Height="768" Width="1024" WindowState="Maximized"
         Icon="pack://application:,,,/Resources/spray-paint.ico">
 
     <Window.Resources>
-        <Style x:Key="CircularButton" TargetType="Button">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Ellipse Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" Width="30" Height="30"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-
-        <local:ColorViewModel x:Key="ColorViewModel"/>
+        <local:ColorViewModel x:Key="ColorViewModel" />
     </Window.Resources>
 
     <Grid>
@@ -34,15 +23,15 @@
 
         <DockPanel LastChildFill="True" Grid.Row="0">
             <Menu DockPanel.Dock="Top" Background="LightGray" Padding="5,5">
-                <MenuItem Header="File" Padding="10 5" >
-                    <MenuItem Header="New" Command="{Binding NewCommand}"/>
-                    <MenuItem Header="Open" Command="{Binding OpenCommand}"/>
-                    <MenuItem Header="Save As" Command="{Binding SaveCommand}"/>
+                <MenuItem Header="File" Padding="10 5">
+                    <MenuItem Header="New" Command="{Binding NewCommand}" />
+                    <MenuItem Header="Open" Command="{Binding OpenCommand}" />
+                    <MenuItem Header="Save As" Command="{Binding SaveCommand}" />
                 </MenuItem>
 
-                <MenuItem Header="View" Padding="10 5" >
-                    <MenuItem Header="Zoom In" Command="{Binding ZoomInCommand}"/>
-                    <MenuItem Header="Zoom Out" Command="{Binding ZoomOutCommand}"/>
+                <MenuItem Header="View" Padding="10 5">
+                    <MenuItem Header="Zoom In" Command="{Binding ZoomInCommand}" />
+                    <MenuItem Header="Zoom Out" Command="{Binding ZoomOutCommand}" />
                     <!-- Other View commands -->
                 </MenuItem>
                 <Separator Style="{StaticResource VerticalMenuSeparatorStyle}" />
@@ -66,30 +55,30 @@
             <!-- Tool Panel -->
             <StackPanel Orientation="Horizontal" Background="#333333">
                 <!-- Tools Section -->
-                <StackPanel Orientation="Vertical" Margin="10" >
+                <StackPanel Orientation="Vertical" Margin="10">
                     <Button Padding="5" Margin="5" ToolTip="Spray Paint" Background="Transparent" Width="32" Height="32">
                         <Image Source="pack://application:,,,/Resources/spray_icon.ico" Height="32" Width="32"
-                               HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill"/>
+                               HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" />
                     </Button>
                     <Button Padding="5" Margin="5" ToolTip="Eraser" Background="Transparent" Width="32" Height="32">
                         <Image Source="pack://application:,,,/Resources/eraser_icon.ico" Height="32" Width="32"
-                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                               HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Button>
-                    <TextBlock Text="Tools" Margin="5" Foreground="White" FontWeight="Normal" TextAlignment="Center" 
-                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="Tools" Margin="5" Foreground="White" FontWeight="Normal" TextAlignment="Center"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </StackPanel>
                 <Border Width="1" Margin="0, 10" Background="DarkGray" HorizontalAlignment="Center" />
                 <!-- Size Section -->
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Background="#333333" Margin="10">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <!--<Ellipse Width="5" Height="5" Fill="White" Margin="2"/>-->
-                        <Slider Margin="5" Minimum="1" Maximum="50" Value="10" TickFrequency="1" Width="100" VerticalAlignment="Center"/>
+                        <Slider Margin="5" Minimum="1" Maximum="50" Value="10" TickFrequency="1" Width="100" VerticalAlignment="Center" />
                         <!--<Ellipse Width="20" Height="20" Fill="White" Margin="2"/>-->
                     </StackPanel>
                     <TextBlock Margin="5" Text="Opacity" Foreground="White" FontWeight="Normal" TextAlignment="Center" />
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <!--<Ellipse Width="5" Height="5" Fill="White" Margin="2"/>-->
-                        <Slider Margin="5" Minimum="1" Maximum="50" Value="10" TickFrequency="1" Width="100" VerticalAlignment="Center"/>
+                        <Slider Margin="5" Minimum="1" Maximum="50" Value="10" TickFrequency="1" Width="100" VerticalAlignment="Center" />
                         <!--<Ellipse Width="20" Height="20" Fill="White" Margin="2"/>-->
                     </StackPanel>
                     <TextBlock Margin="5" Text="Thickness" Foreground="White" FontWeight="Normal" TextAlignment="Center" />
@@ -139,10 +128,9 @@
             </StackPanel>
         </DockPanel>
         <!-- Canvas to draw on -->
-        <Border Grid.Row="1" Background="Gray" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Canvas x:Name="PaintCanvas" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" ClipToBounds="True">
-                <Image x:Name="EditableImage" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </Canvas>
+
+        <Border Grid.Row="1" Background="LightGray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+            <Image d:DataContext="{d:DesignInstance Type=local:LoginViewModel}" Source="{Binding ImageData.Photo}" />
         </Border>
     </Grid>
 </Window>

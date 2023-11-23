@@ -2,10 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Spray_Paint_Application"
-             xmlns:converter="clr-namespace:Spray_Paint_Application.Converter"
              StartupUri="View/LoginView.xaml">
     <Application.Resources>
-        <converter:SelectedToBorderBrushConverter x:Key="SelectedToBorderBrushConverter"/>
         <Style x:Key="VerticalMenuSeparatorStyle" TargetType="{x:Type Separator}">
             <Setter Property="Template">
                 <Setter.Value>

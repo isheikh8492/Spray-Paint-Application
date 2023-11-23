@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Spray_Paint_Application.ViewModel
@@ -43,6 +44,28 @@ namespace Spray_Paint_Application.ViewModel
             }
         }
 
+        private ScaleTransform _imageScaleTransform;
+        public ScaleTransform ImageScaleTransform
+        {
+            get => _imageScaleTransform;
+            set
+            {
+                _imageScaleTransform = value;
+                OnPropertyChanged(nameof(ImageScaleTransform));
+            }
+        }
+
+        private Thickness _imageMargin;
+        public Thickness ImageMargin
+        {
+            get => _imageMargin;
+            set
+            {
+                _imageMargin = value;
+                OnPropertyChanged(nameof(ImageMargin));
+            }
+        }
+
         public ICommand LoadImageCommand { get; }
         public ICommand OpenEditorCommand { get; }
 
@@ -68,6 +91,7 @@ namespace Spray_Paint_Application.ViewModel
                 BitmapImage bitmap = new BitmapImage(new Uri(openFileDialog.FileName));
                 ImageData.Photo = bitmap;
                 ImageBorderVisibility = Visibility.Visible;
+                UpdateImagePresentation(bitmap);
             } else
             {
                 ImageBorderVisibility = Visibility.Collapsed;
@@ -85,7 +109,7 @@ namespace Spray_Paint_Application.ViewModel
             if (ImageData.Photo != null)
             {
                 var loginWindow = Application.Current.Windows.OfType<LoginView>().FirstOrDefault();
-                EditorWindow editorWindow = new EditorWindow(ImageData.Photo);
+                EditorWindow editorWindow = new EditorWindow(this.ImageData);
                 loginWindow?.Close();
                 editorWindow.Show();
             } else
@@ -95,5 +119,20 @@ namespace Spray_Paint_Application.ViewModel
             
         }
 
+        private void UpdateImagePresentation(BitmapImage bitmap)
+        {
+            double canvasWidth = 800;
+            double canvasHeight = 600;
+
+            double scaleX = canvasWidth / bitmap.PixelWidth;
+            double scaleY = canvasHeight / bitmap.PixelHeight;
+            double scale = Math.Min(scaleX, scaleY);
+
+            ImageScaleTransform = new ScaleTransform(scale, scale);
+
+            double offsetX = (canvasWidth - bitmap.PixelWidth * scale) / 2;
+            double offsetY = (canvasHeight - bitmap.PixelHeight * scale) / 2;
+            ImageMargin = new Thickness(offsetX, offsetY, 0, 0);
+        }
     }
 }

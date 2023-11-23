@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System;
 using Spray_Paint_Application.Model;
 
-namespace Spray_Paint_Application.View
+namespace Spray_Paint_Application.ViewModel
 {
     public class ColorViewModel : INotifyPropertyChanged
     {

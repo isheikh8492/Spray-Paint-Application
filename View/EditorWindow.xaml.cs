@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Spray_Paint_Application.Model;
+using Spray_Paint_Application.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,11 +21,12 @@ namespace Spray_Paint_Application.View
     /// </summary>
     public partial class EditorWindow : Window
     {
-        public EditorWindow(ImageSource photo)
+        public EditorWindow(ImageModel imageData)
         {
             InitializeComponent();
-            EditableImage.Source = photo;
-            DataContext = new ColorViewModel();
+            var viewModel = new LoginViewModel();
+            viewModel.ImageData = imageData; // Assign the entire ImageModel, which includes the photo
+            DataContext = viewModel; // Set the DataContext to the LoginViewModel
         }
     }
 }
