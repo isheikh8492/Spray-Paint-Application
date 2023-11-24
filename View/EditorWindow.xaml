@@ -129,17 +129,19 @@
             </StackPanel>
         </DockPanel>
         <Grid Grid.Row="1" Background="LightGray">
-            <Viewbox Stretch="Uniform">
+            <Viewbox Stretch="Uniform" Margin="10">
                 <Canvas Width="1024" Height="591">
-                    <!-- The Canvas has a fixed size and the Image will scale to fit within this size -->
-                    <Image Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Canvas}}"
+                    <Border x:Name="EditableImageBorder" Background="White" BorderBrush="Black" 
+            BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Stretch" >
+                        <Image Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Canvas}}"
                        Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Canvas}}"
                        Source="{Binding ImageData.Photo}" 
                        Stretch="Uniform" />
+                    </Border>
+                    <!-- The Canvas has a fixed size and the Image will scale to fit within this size -->
+                    
                 </Canvas>
             </Viewbox>
         </Grid>
-        
-        
     </Grid>
 </Window>
