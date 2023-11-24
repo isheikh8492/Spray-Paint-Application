@@ -1,4 +1,4 @@
-﻿<Window x:Class="Spray_Paint_Application.View.EditorWindow"
+﻿<Window xmlns:syncfusion="http://schemas.syncfusion.com/wpf"  x:Class="Spray_Paint_Application.View.EditorWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -87,44 +87,18 @@
 
                 <Border Width="1" Margin="0, 10" Background="DarkGray" HorizontalAlignment="Center" />
                 <!-- Color Picker Section -->
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel>
-                        <Border Width="60" Height="60" Margin="10" Background="Yellow" BorderBrush="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#333333">
+                        <syncfusion:ColorPickerPalette x:Name="colorPickerPalette"  Background="#333" BorderBrush="White"
+                                       GenerateThemeVariants="True"
+                                       GenerateStandardVariants="True"
+                                                       RecentlyUsedPanelVisibility="Visible"
+                                       Margin="20" Width="150" 
+                                       Height="50"
+                                                       NoColorVisibility="Visible"/>
                     </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <!-- First Row -->
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#333333">
-                            <Button Width="30" Height="30" Margin="5" Background="Black" BorderBrush="Transparent" />
-                            <Button Width="30" Height="30" Margin="5" Background="White" BorderBrush="Transparent" />
-                            <Button Width="30" Height="30" Margin="5" Background="Red" BorderBrush="Transparent" />
-                            <Button Width="30" Height="30" Margin="5" Background="Green" BorderBrush="Transparent" />
-                            <Button Width="30" Height="30" Margin="5" Background="Blue" BorderBrush="Transparent" />
-                            <Button Width="30" Height="30" Margin="5" Background="Yellow" BorderBrush="Transparent" />
-                        </StackPanel>
-                        <!-- Second Row -->
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#333333">
-                            <Button Width="30" Height="30" Margin="5" Background="Orange" BorderBrush="Transparent" />
-                            <Button Width="30" Height="30" Margin="5" Background="Purple" BorderBrush="Transparent" />
-                            <Button Width="30" Height="30" Margin="5" Background="Pink" BorderBrush="Transparent" />
-                            <Button Width="30" Height="30" Margin="5" Background="Brown" BorderBrush="Transparent" />
-                            <Button Width="30" Height="30" Margin="5" Background="Gray" BorderBrush="Transparent" />
-                            <Button Width="30" Height="30" Margin="5" Background="Cyan" BorderBrush="Transparent" />
-                        </StackPanel>
-                        <!-- Third Row -->
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#333333">
-                            <Button Width="30" Height="30" Margin="5" Background="Magenta" BorderBrush="Transparent" />
-                            <Button Width="30" Height="30" Margin="5" Background="Lime" BorderBrush="Transparent" />
-                            <Button Width="30" Height="30" Margin="5" Background="Olive" BorderBrush="Transparent" />
-                            <Button Width="30" Height="30" Margin="5" Background="Navy" BorderBrush="Transparent" />
-                            <Button Width="30" Height="30" Margin="5" Background="Teal" BorderBrush="Transparent" />
-                            <Button Width="30" Height="30" Margin="5" Background="Maroon" BorderBrush="Transparent" />
-                        </StackPanel>
-                    </StackPanel>
-                    <!-- User Choice -->
-                    <!-- TODO: set up a random color picker -->
-                    <!--<StackPanel>
-                        <Border Width="60" Height="60" Margin="10" Background="Yellow" BorderBrush="Transparent" />
-                    </StackPanel>-->
+                    <TextBlock Text="Color Selection" Margin="5" Foreground="White" FontWeight="Normal" TextAlignment="Center"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </StackPanel>
             </StackPanel>
         </DockPanel>

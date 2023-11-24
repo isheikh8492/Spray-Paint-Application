@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Spray_Paint_Application.View
 {
     /// <summary>
-    /// Interaction logic for ViewBoxTest.xaml
+    /// Interaction logic for ColorPicker.xaml
     /// </summary>
-    public partial class ViewBoxTest : Window
+    public partial class ColorPicker : Window
     {
-        public ViewBoxTest()
+        public ColorPicker()
         {
             InitializeComponent();
         }
