@@ -6,13 +6,14 @@
         xmlns:local="clr-namespace:Spray_Paint_Application.ViewModel"
         xmlns:model="clr-namespace:Spray_Paint_Application.Model"
         xmlns:xctk="http://schemas/xceed.com/wpf/xaml/toolkit"
-        xmlns:colorviewmodel="clr-namespace:Spray_Paint_Application.ViewModel" d:DataContext="{d:DesignInstance Type=local:ColorViewModel}"
+        xmlns:colorviewmodel="clr-namespace:Spray_Paint_Application.ViewModel" d:DataContext="{d:DesignInstance Type=local:LoginViewModel}"
         mc:Ignorable="d"
         Title="Spray Paint Application" Height="768" Width="1024" WindowState="Maximized"
         Icon="pack://application:,,,/Resources/spray-paint.ico">
 
     <Window.Resources>
         <local:ColorViewModel x:Key="ColorViewModel" />
+        <local:LoginViewModel x:Key="LoginViewModel"/>
     </Window.Resources>
 
     <Grid>
@@ -127,10 +128,18 @@
                 </StackPanel>
             </StackPanel>
         </DockPanel>
-        <!-- Canvas to draw on -->
-
-        <Border Grid.Row="1" Background="LightGray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-            <Image d:DataContext="{d:DesignInstance Type=local:LoginViewModel}" Source="{Binding ImageData.Photo}" />
-        </Border>
+        <Grid Grid.Row="1" Background="LightGray">
+            <Viewbox Stretch="Uniform">
+                <Canvas Width="1024" Height="591">
+                    <!-- The Canvas has a fixed size and the Image will scale to fit within this size -->
+                    <Image Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Canvas}}"
+                       Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Canvas}}"
+                       Source="{Binding ImageData.Photo}" 
+                       Stretch="Uniform" />
+                </Canvas>
+            </Viewbox>
+        </Grid>
+        
+        
     </Grid>
 </Window>

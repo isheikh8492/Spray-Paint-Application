@@ -1,0 +1,16 @@
+﻿<Window x:Class="Spray_Paint_Application.View.ViewBoxTest"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ViewBoxTest" WindowState="Maximized">
+    <Grid>
+        <Viewbox Stretch="Uniform">
+            <Canvas Width="800" Height="450" Background="Transparent">
+                <!-- The Canvas has a fixed size and the Image will scale to fit within this size -->
+                <Image Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Canvas}}"
+                       Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Canvas}}"
+                       Source="pack://application:,,,/Resources/IMG_0645.jpg" 
+                       Stretch="Uniform" />
+            </Canvas>
+        </Viewbox>
+    </Grid>
+</Window>

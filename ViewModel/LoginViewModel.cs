@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -65,6 +66,27 @@ namespace Spray_Paint_Application.ViewModel
                 OnPropertyChanged(nameof(ImageMargin));
             }
         }
+        private double _imageWidth;
+    public double ImageWidth
+    {
+        get => _imageWidth;
+        set
+        {
+            _imageWidth = value;
+            OnPropertyChanged(nameof(ImageWidth));
+        }
+    }
+
+    private double _imageHeight;
+    public double ImageHeight
+    {
+        get => _imageHeight;
+        set
+        {
+            _imageHeight = value;
+            OnPropertyChanged(nameof(ImageHeight));
+        }
+    }
 
         public ICommand LoadImageCommand { get; }
         public ICommand OpenEditorCommand { get; }
@@ -91,7 +113,6 @@ namespace Spray_Paint_Application.ViewModel
                 BitmapImage bitmap = new BitmapImage(new Uri(openFileDialog.FileName));
                 ImageData.Photo = bitmap;
                 ImageBorderVisibility = Visibility.Visible;
-                UpdateImagePresentation(bitmap);
             } else
             {
                 ImageBorderVisibility = Visibility.Collapsed;
@@ -112,27 +133,12 @@ namespace Spray_Paint_Application.ViewModel
                 EditorWindow editorWindow = new EditorWindow(this.ImageData);
                 loginWindow?.Close();
                 editorWindow.Show();
-            } else
+            }
+            else
             {
                 MessageBox.Show("Please load image before continuing.", "Loading Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
-        }
 
-        private void UpdateImagePresentation(BitmapImage bitmap)
-        {
-            double canvasWidth = 800;
-            double canvasHeight = 600;
-
-            double scaleX = canvasWidth / bitmap.PixelWidth;
-            double scaleY = canvasHeight / bitmap.PixelHeight;
-            double scale = Math.Min(scaleX, scaleY);
-
-            ImageScaleTransform = new ScaleTransform(scale, scale);
-
-            double offsetX = (canvasWidth - bitmap.PixelWidth * scale) / 2;
-            double offsetY = (canvasHeight - bitmap.PixelHeight * scale) / 2;
-            ImageMargin = new Thickness(offsetX, offsetY, 0, 0);
         }
     }
 }
