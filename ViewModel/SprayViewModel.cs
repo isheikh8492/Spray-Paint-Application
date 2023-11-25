@@ -39,7 +39,7 @@ namespace Spray_Paint_Application.ViewModel
         {
             _sprayTimer = new DispatcherTimer
             {
-                Interval = TimeSpan.FromMilliseconds(50) // Adjust the interval to your preference
+                Interval = TimeSpan.FromMilliseconds(15)
             };
             _sprayTimer.Tick += (s, e) => SprayPaint(_currentPosition);
 
