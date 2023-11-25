@@ -25,8 +25,8 @@ namespace Spray_Paint_Application.View
         {
             InitializeComponent();
             var viewModel = new LoginViewModel();
-            viewModel.ImageData = imageData; // Assign the entire ImageModel, which includes the photo
-            DataContext = viewModel; // Set the DataContext to the LoginViewModel
+            viewModel.ImageData = imageData;
+            DataContext = viewModel;
         }
     }
 }

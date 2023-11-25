@@ -94,7 +94,7 @@ namespace Spray_Paint_Application.ViewModel
         public LoginViewModel()
         {
             LoadImageCommand = new RelayCommand(LoadImage);
-            OpenEditorCommand = new RelayCommand(OpenEditor, () => CanOpenEditor());
+            OpenEditorCommand = new RelayCommand(OpenEditor, () => CanOpenEditor()); 
         }
 
         protected virtual void OnPropertyChanged(string propertyName)
