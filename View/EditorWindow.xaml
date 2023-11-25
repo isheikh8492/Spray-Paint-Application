@@ -10,7 +10,7 @@
         Icon="pack://application:,,,/Resources/spray-paint.ico">
 
     <Window.Resources>
-        <local:PaintViewModel x:Key="PaintViewModel" />
+        <local:SprayViewModel x:Key="SprayViewModel" />
         <local:LoginViewModel x:Key="LoginViewModel"/>
     </Window.Resources>
 
@@ -103,43 +103,44 @@
         <Grid Grid.Row="1" Background="LightGray">
             <Viewbox Stretch="Uniform" Margin="10">
                 <Canvas x:Name="paintCanvas" Width="1024" Height="591" Background="Transparent">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeftButtonDown">
-                            <i:InvokeCommandAction Command="{Binding CanvasMouseDownCommand}" />
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="MouseMove">
-                            <i:InvokeCommandAction Command="{Binding CanvasMouseMoveCommand}" 
-                                   />
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="MouseLeftButtonUp">
-                            <i:InvokeCommandAction Command="{Binding CanvasMouseUpCommand}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    <!-- Bind the ItemsControl to the collection of paint elements -->
-                    <ItemsControl ItemsSource="{Binding PaintElements}">
+                    <!-- Bind DataContext of Canvas to SprayViewModel -->
+                    <Canvas.DataContext>
+                        <Binding Source="{StaticResource SprayViewModel}" />
+                    </Canvas.DataContext>
+
+                    <!-- Bind Image to LoginViewModel's ImageData -->
+                    <Image DataContext="{StaticResource LoginViewModel}" 
+                           Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Canvas}}"
+                           Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Canvas}}"
+                           Source="{Binding ImageData.Photo}"
+                           Stretch="Uniform" />
+
+                    <!-- Paint Dots -->
+                    <ItemsControl ItemsSource="{Binding PaintDots}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <!-- Use the Canvas as the panel for the ItemsControl -->
                                 <Canvas IsItemsHost="True"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
 
-                    <Border x:Name="EditableImageBorder" Background="White" BorderBrush="Black" 
-                    BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Stretch">
-                        <Image Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Canvas}}"
-                       Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Canvas}}"
-                       Source="{Binding ImageData.Photo}" 
-                       Stretch="Uniform" />
-                    </Border>
-                    
-                    <Canvas.InputBindings>
-                        <MouseBinding MouseAction="LeftClick" Command="{Binding CanvasMouseDownCommand}" />
-                        <MouseBinding MouseAction="LeftClick" Command="{Binding CanvasMouseUpCommand}" />
-                    </Canvas.InputBindings>
+                    <!-- Input Bindings -->
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding CanvasMouseDownCommand}" 
+                                   CommandParameter="{Binding ElementName=paintCanvas, Path=MousePosition}" />
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="MouseMove">
+                            <i:InvokeCommandAction Command="{Binding CanvasMouseMoveCommand}" 
+                                   CommandParameter="{Binding ElementName=paintCanvas, Path=MousePosition}" />
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding CanvasMouseUpCommand}" 
+                                   CommandParameter="{Binding ElementName=paintCanvas, Path=MousePosition}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </Canvas>
             </Viewbox>
         </Grid>
-
     </Grid>
 </Window>

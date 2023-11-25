@@ -24,9 +24,13 @@ namespace Spray_Paint_Application.View
         public EditorWindow(ImageModel imageData)
         {
             InitializeComponent();
-            var viewModel = new LoginViewModel();
-            viewModel.ImageData = imageData;
-            DataContext = viewModel;
+
+            // Set DataContext for LoginViewModel
+            var loginViewModel = (LoginViewModel)this.Resources["LoginViewModel"];
+            loginViewModel.ImageData = imageData;
+
+            // If needed, you can also access SprayViewModel here
+            // var sprayViewModel = (SprayViewModel)this.Resources["SprayViewModel"];
         }
     }
 }
