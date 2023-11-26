@@ -23,7 +23,8 @@
         </Grid.RowDefinitions>
 
         <DockPanel LastChildFill="True" Grid.Row="0">
-            <Menu DockPanel.Dock="Top" Background="LightGray" Padding="5,5">
+            <Menu DockPanel.Dock="Top" Background="LightGray" Padding="5,5"
+                  DataContext="{StaticResource SprayViewModel}">
                 <MenuItem Header="File" Padding="10 5">
                     <MenuItem Header="New" Command="{Binding NewCommand}" />
                     <MenuItem Header="Open" Command="{Binding OpenCommand}" />
@@ -42,12 +43,14 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator Style="{StaticResource VerticalMenuSeparatorStyle}" />
-                <MenuItem Width="24" Padding="10,5" Margin="2.5,0">
+                <MenuItem Width="24" Padding="10,5" Margin="2.5,0"
+                          Command="{Binding UndoCommand}">
                     <MenuItem.Icon>
                         <Image Source="pack://application:,,,/Resources/undoarrow.ico" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Width="24" Padding="10,5" Margin="2.5,0">
+                <MenuItem Width="24" Padding="10,5" Margin="2.5,0" 
+                          Command="{Binding RedoCommand}">
                     <MenuItem.Icon>
                         <Image Source="pack://application:,,,/Resources/redoarrow.ico" />
                     </MenuItem.Icon>
