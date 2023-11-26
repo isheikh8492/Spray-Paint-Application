@@ -54,5 +54,16 @@ namespace Spray_Paint_Application.View
             var sprayViewModel = (SprayViewModel)Resources["SprayViewModel"];
             sprayViewModel.CanvasMouseUpCommand.Execute(position);
         }
+
+        private void EditableImage_Loaded(object sender, RoutedEventArgs e)
+        {
+            var image = sender as Image;
+            if (image != null && image.Source != null)
+            {
+                paintCanvas.Width = image.ActualWidth;
+                paintCanvas.Height = image.ActualHeight;
+                paintCanvas.Clip = new RectangleGeometry(new Rect(0, 0, image.ActualWidth, image.ActualHeight));
+            }
+        }
     }
 }

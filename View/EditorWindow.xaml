@@ -116,7 +116,8 @@
                            Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Canvas}}"
                            Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Canvas}}"
                            Source="{Binding ImageData.Photo}"
-                           Stretch="Uniform" />
+                           Stretch="Uniform"
+                           Loaded="EditableImage_Loaded" />
 
                     <!-- Paint Dots -->
                     <ItemsControl ItemsSource="{Binding PaintDots}">
@@ -126,22 +127,6 @@
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
-
-                    <!-- Input Bindings --><!--
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeftButtonDown">
-                            <i:InvokeCommandAction Command="{Binding CanvasMouseDownCommand}" 
-                                   CommandParameter="{Binding ElementName=paintCanvas, Path=MousePosition}" />
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="MouseMove">
-                            <i:InvokeCommandAction Command="{Binding CanvasMouseMoveCommand}" 
-                                   CommandParameter="{Binding ElementName=paintCanvas, Path=MousePosition}" />
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="MouseLeftButtonUp">
-                            <i:InvokeCommandAction Command="{Binding CanvasMouseUpCommand}" 
-                                   CommandParameter="{Binding ElementName=paintCanvas, Path=MousePosition}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>-->
                 </Canvas>
             </Viewbox>
         </Grid>
