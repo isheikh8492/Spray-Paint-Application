@@ -71,16 +71,15 @@
                 <Border Width="1" Margin="0, 10" Background="DarkGray" HorizontalAlignment="Center" />
                 <!-- Size Section -->
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Background="#333333" Margin="10">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <!--<Ellipse Width="5" Height="5" Fill="White" Margin="2"/>-->
-                        <Slider Margin="5" Minimum="1" Maximum="50" Value="10" TickFrequency="1" Width="100" VerticalAlignment="Center" />
-                        <!--<Ellipse Width="20" Height="20" Fill="White" Margin="2"/>-->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" 
+                                DataContext="{StaticResource SprayViewModel}" VerticalAlignment="Center">
+                        <Slider Minimum="1" Margin="5" Maximum="100" Value="{Binding BrushDensity, 
+                            Mode=TwoWay}" TickFrequency="1" Width="100" />
                     </StackPanel>
                     <TextBlock Margin="5" Text="Opacity" Foreground="White" FontWeight="Normal" TextAlignment="Center" />
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <!--<Ellipse Width="5" Height="5" Fill="White" Margin="2"/>-->
-                        <Slider Margin="5" Minimum="1" Maximum="50" Value="10" TickFrequency="1" Width="100" VerticalAlignment="Center" />
-                        <!--<Ellipse Width="20" Height="20" Fill="White" Margin="2"/>-->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" 
+                                DataContext="{StaticResource SprayViewModel}" VerticalAlignment="Center">
+                        <Slider Margin="5" Minimum="1" Maximum="50" Value="{Binding BrushSize, Mode=TwoWay}" TickFrequency="1" Width="100" VerticalAlignment="Center" />
                     </StackPanel>
                     <TextBlock Margin="5" Text="Thickness" Foreground="White" FontWeight="Normal" TextAlignment="Center" />
                 </StackPanel>

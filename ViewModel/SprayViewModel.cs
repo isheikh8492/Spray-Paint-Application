@@ -23,6 +23,8 @@ namespace Spray_Paint_Application.ViewModel
         public ICommand CanvasMouseUpCommand { get; }
 
         private SolidColorBrush _paintColor = Brushes.Black;
+        private int _brushSize = 10; // Default value
+        private int _brushDensity = 10; // Default value
         public SolidColorBrush PaintColor
         {
             get => _paintColor;
@@ -33,13 +35,39 @@ namespace Spray_Paint_Application.ViewModel
             }
         }
 
+        public int BrushSize
+        {
+            get => _brushSize;
+            set
+            {
+                if (_brushSize != value)
+                {
+                    _brushSize = value;
+                    OnPropertyChanged(nameof(BrushSize));
+                }
+            }
+        }
+
+        public int BrushDensity
+        {
+            get => _brushDensity;
+            set
+            {
+                if (_brushDensity != value)
+                {
+                    _brushDensity = value;
+                    OnPropertyChanged(nameof(BrushDensity));
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public SprayViewModel()
         {
             _sprayTimer = new DispatcherTimer
             {
-                Interval = TimeSpan.FromMilliseconds(15)
+                Interval = TimeSpan.FromMilliseconds(10)
             };
             _sprayTimer.Tick += (s, e) => SprayPaint(_currentPosition);
 
@@ -68,32 +96,37 @@ namespace Spray_Paint_Application.ViewModel
 
         private void SprayPaint(Point position)
         {
-            if (!_isPainting) return;
+            int dotsToCreate = BrushDensity; // More dots for higher density
+            int radius = BrushSize; // Radius of the spray circle
 
-            Random rand = new Random();
-            for (int i = 0; i < 10; i++) // Number of dots to create for each spray action
+            for (int i = 0; i < dotsToCreate; i++)
             {
-                double angle = rand.NextDouble() * Math.PI * 2;
-                double radius = rand.NextDouble() * 10; // Range of spray effect
+                // Random angle and distance within the spray circle
+                double angle = new Random().NextDouble() * Math.PI * 2;
+                double distance = new Random().NextDouble() * radius;
 
-                Ellipse dot = new Ellipse
+                // Calculate the position based on the angle and distance
+                Point dotPosition = new Point(
+                    position.X + distance * Math.Cos(angle),
+                    position.Y + distance * Math.Sin(angle));
+
+                // Create a dot and add it to the canvas
+                Rectangle dot = new Rectangle
                 {
-                    Width = 2, // Small dot size
-                    Height = 2,
-                    Fill = PaintColor // Use the current paint color
+                    Width = 1,
+                    Height = 1,
+                    Fill = PaintColor
                 };
-
-                double offsetX = Math.Cos(angle) * radius;
-                double offsetY = Math.Sin(angle) * radius;
 
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    Canvas.SetLeft(dot, position.X + offsetX);
-                    Canvas.SetTop(dot, position.Y + offsetY);
+                    Canvas.SetLeft(dot, dotPosition.X);
+                    Canvas.SetTop(dot, dotPosition.Y);
                     PaintDots.Add(dot);
                 });
             }
         }
+
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
