@@ -1,4 +1,5 @@
-﻿<Window xmlns:syncfusion="http://schemas.syncfusion.com/wpf"  x:Class="Spray_Paint_Application.View.EditorWindow"
+﻿<Window xmlns:syncfusion="http://schemas.syncfusion.com/wpf"  
+        x:Class="Spray_Paint_Application.View.EditorWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +7,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Spray_Paint_Application.ViewModel" d:DataContext="{d:DesignInstance Type=local:PaintViewModel}"
         mc:Ignorable="d"
-        Title="Spray Paint Application" Height="768" Width="1024" WindowState="Maximized"
+        Title="Spray Paint Application" Height="768" Width="1024" 
+        WindowState="Maximized"
         Icon="pack://application:,,,/Resources/spray-paint.ico">
 
     <Window.Resources>
@@ -102,7 +104,8 @@
         </DockPanel>
         <Grid Grid.Row="1" Background="LightGray">
             <Viewbox Stretch="Uniform" Margin="10">
-                <Canvas x:Name="paintCanvas" Width="1024" Height="591" Background="Transparent">
+                <Canvas x:Name="paintCanvas" Width="1024" Height="591" Background="Transparent"
+                        MouseDown="Canvas_MouseDown" MouseMove="Canvas_MouseMove" MouseUp="Canvas_MouseUp">
                     <!-- Bind DataContext of Canvas to SprayViewModel -->
                     <Canvas.DataContext>
                         <Binding Source="{StaticResource SprayViewModel}" />
@@ -124,7 +127,7 @@
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
 
-                    <!-- Input Bindings -->
+                    <!-- Input Bindings --><!--
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonDown">
                             <i:InvokeCommandAction Command="{Binding CanvasMouseDownCommand}" 
@@ -138,7 +141,7 @@
                             <i:InvokeCommandAction Command="{Binding CanvasMouseUpCommand}" 
                                    CommandParameter="{Binding ElementName=paintCanvas, Path=MousePosition}" />
                         </i:EventTrigger>
-                    </i:Interaction.Triggers>
+                    </i:Interaction.Triggers>-->
                 </Canvas>
             </Viewbox>
         </Grid>

@@ -16,7 +16,9 @@ namespace Spray_Paint_Application
         public App()
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider
-                .RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NHaF1cWWhIfEx0QHxbf1xzZFRHalhWTnJeUiweQnxTdEZiWH1bcXVRQWRdWUNxVw==");
+                .RegisterLicense
+                ("Ngo9BigBOggjHTQxAR8/V1NHaF1cWWhIfEx0QHxb" +
+                "f1xzZFRHalhWTnJeUiweQnxTdEZiWH1bcXVRQWRdWUNxVw==");
         }
     }
 }

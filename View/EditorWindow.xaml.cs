@@ -25,12 +25,34 @@ namespace Spray_Paint_Application.View
         {
             InitializeComponent();
 
-            // Set DataContext for LoginViewModel
-            var loginViewModel = (LoginViewModel)this.Resources["LoginViewModel"];
+            // Set the DataContext for the image part of the UI to LoginViewModel
+            var loginViewModel = (LoginViewModel)Resources["LoginViewModel"];
             loginViewModel.ImageData = imageData;
+            DataContext = loginViewModel;
+        }
 
-            // If needed, you can also access SprayViewModel here
-            // var sprayViewModel = (SprayViewModel)this.Resources["SprayViewModel"];
+        private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var position = e.GetPosition(paintCanvas);
+            var sprayViewModel = (SprayViewModel)Resources["SprayViewModel"];
+            sprayViewModel.CanvasMouseDownCommand.Execute(position);
+        }
+
+        private void Canvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                var position = e.GetPosition(paintCanvas);
+                var sprayViewModel = (SprayViewModel)Resources["SprayViewModel"];
+                sprayViewModel.CanvasMouseMoveCommand.Execute(position);
+            }
+        }
+
+        private void Canvas_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            var position = e.GetPosition(paintCanvas);
+            var sprayViewModel = (SprayViewModel)Resources["SprayViewModel"];
+            sprayViewModel.CanvasMouseUpCommand.Execute(position);
         }
     }
 }
