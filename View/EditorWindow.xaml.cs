@@ -24,18 +24,19 @@ namespace Spray_Paint_Application.View
         public EditorWindow(ImageModel imageData)
         {
             InitializeComponent();
-
-            // Set the DataContext for the image part of the UI to LoginViewModel
-            var loginViewModel = (LoginViewModel)Resources["LoginViewModel"];
-            loginViewModel.ImageData = imageData;
-            DataContext = loginViewModel;
+            var viewModel = new EditorViewModel();
+            viewModel.Initialize(imageData); // Make sure imageData is not null
+            DataContext = viewModel;
         }
+
 
         private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var position = e.GetPosition(paintCanvas);
-            var sprayViewModel = (SprayViewModel)Resources["SprayViewModel"];
-            sprayViewModel.CanvasMouseDownCommand.Execute(position);
+            // Retrieve SprayViewModel from the DataContext which is an instance of EditorViewModel
+            var editorViewModel = DataContext as EditorViewModel;
+            var sprayViewModel = editorViewModel?.SprayViewModel;
+            sprayViewModel?.CanvasMouseDownCommand.Execute(position);
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
@@ -43,16 +44,20 @@ namespace Spray_Paint_Application.View
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 var position = e.GetPosition(paintCanvas);
-                var sprayViewModel = (SprayViewModel)Resources["SprayViewModel"];
-                sprayViewModel.CanvasMouseMoveCommand.Execute(position);
+                // Retrieve SprayViewModel from the DataContext which is an instance of EditorViewModel
+                var editorViewModel = DataContext as EditorViewModel;
+                var sprayViewModel = editorViewModel?.SprayViewModel;
+                sprayViewModel?.CanvasMouseMoveCommand.Execute(position);
             }
         }
+
 
         private void Canvas_MouseUp(object sender, MouseButtonEventArgs e)
         {
             var position = e.GetPosition(paintCanvas);
-            var sprayViewModel = (SprayViewModel)Resources["SprayViewModel"];
-            sprayViewModel.CanvasMouseUpCommand.Execute(position);
+            var editorViewModel = DataContext as EditorViewModel;
+            var sprayViewModel = editorViewModel?.SprayViewModel;
+            sprayViewModel?.CanvasMouseUpCommand.Execute(position);
         }
 
         private void EditableImage_Loaded(object sender, RoutedEventArgs e)

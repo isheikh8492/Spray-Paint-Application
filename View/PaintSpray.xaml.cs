@@ -10,6 +10,7 @@ namespace Spray_Paint_Application.View
         public PaintSpray()
         {
             InitializeComponent();
+
         }
 
         private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)

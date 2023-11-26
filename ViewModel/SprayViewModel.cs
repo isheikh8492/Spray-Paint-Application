@@ -107,6 +107,7 @@ namespace Spray_Paint_Application.ViewModel
                         PaintDots.Add(shape); // Undoing removal
                 }
             }
+            CommandManager.InvalidateRequerySuggested();
         }
 
         private void PerformRedo()
@@ -122,6 +123,7 @@ namespace Spray_Paint_Application.ViewModel
                         PaintDots.Remove(shape); // Redoing removal
                 }
             }
+            CommandManager.InvalidateRequerySuggested();
         }
 
         private void CanvasMouseDown(Point position)
@@ -184,8 +186,6 @@ namespace Spray_Paint_Application.ViewModel
                 IsAddition = true
             });
         }
-
-
 
         protected virtual void OnPropertyChanged(string propertyName)
         {

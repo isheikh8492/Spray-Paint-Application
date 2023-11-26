@@ -6,6 +6,10 @@
     <Window.DataContext>
         <local:SprayViewModel/>
     </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding UndoCommand}" Modifiers="Ctrl" Key="Z" />
+        <KeyBinding Command="{Binding RedoCommand}" Modifiers="Ctrl" Key="Y" />
+    </Window.InputBindings>
     <Grid>
         <Canvas Background="LightGray" MouseDown="Canvas_MouseDown" MouseMove="Canvas_MouseMove" MouseUp="Canvas_MouseUp">
             <ItemsControl ItemsSource="{Binding PaintDots}">
