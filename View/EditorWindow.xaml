@@ -88,14 +88,15 @@
                 <Border Width="1" Margin="0, 10" Background="DarkGray" HorizontalAlignment="Center" />
                 <!-- Color Picker Section -->
                 <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#333333">
-                        <syncfusion:ColorPickerPalette x:Name="colorPickerPalette"  Background="#333" BorderBrush="White"
-                                       GenerateThemeVariants="True"
-                                       GenerateStandardVariants="True"
-                                                       RecentlyUsedPanelVisibility="Visible"
-                                       Margin="20" Width="150" 
-                                       Height="50"
-                                                       NoColorVisibility="Visible"/>
+                    <StackPanel DataContext="{StaticResource SprayViewModel}"
+                                Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#333333">
+                        <syncfusion:ColorPickerPalette x:Name="colorPickerPalette"
+                               SelectedBrush="{Binding PaintColor, Mode=TwoWay}"
+                               GenerateThemeVariants="True"
+                               GenerateStandardVariants="True"
+                               RecentlyUsedPanelVisibility="Visible"
+                               Margin="20" Width="150" Height="50"
+                               NoColorVisibility="Visible"/>
                     </StackPanel>
                     <TextBlock Text="Color Selection" Margin="5" Foreground="White" FontWeight="Normal" TextAlignment="Center"
                                HorizontalAlignment="Center" VerticalAlignment="Center" />
