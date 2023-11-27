@@ -1,14 +1,19 @@
-﻿using GalaSoft.MvvmLight.CommandWpf;
+﻿using DevExpress.Data.Browsing;
+using GalaSoft.MvvmLight.CommandWpf;
+using Microsoft.Win32;
+using Newtonsoft.Json;
 using Spray_Paint_Application.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
@@ -26,7 +31,7 @@ namespace Spray_Paint_Application.ViewModel
         private readonly DispatcherTimer _sprayTimer;
         private Point _currentPosition;
         private bool _isPainting;
-
+        public Action<string> SaveCanvasDelegate { get; set; }
         public ObservableCollection<Shape> PaintDots { get; } = new ObservableCollection<Shape>();
         public ICommand CanvasMouseDownCommand { get; }
         public ICommand CanvasMouseMoveCommand { get; }
@@ -34,6 +39,8 @@ namespace Spray_Paint_Application.ViewModel
         public ICommand UndoCommand { get; }
         public ICommand RedoCommand { get; }
         public ICommand EraserCommand { get; private set; }
+
+        public ICommand SaveImageAndSprayDataCommand { get; set; }
 
         private SolidColorBrush _paintColor = Brushes.Black;
         private int _brushSize = 10; // Default value
@@ -112,6 +119,7 @@ namespace Spray_Paint_Application.ViewModel
             EraserCommand = new RelayCommand<Point>(ErasePaint);
             ActivatePaintCommand = new RelayCommand(() => ActiveTool = ActiveTool.Paint);
             ActivateEraserCommand = new RelayCommand(() => ActiveTool = ActiveTool.Erase);
+            SaveImageAndSprayDataCommand = new RelayCommand(SaveImageAndSprayData);
         }
 
         private bool CanPerformUndo()
@@ -280,6 +288,40 @@ namespace Spray_Paint_Application.ViewModel
             }
         }
 
+        public void SaveImageAndSprayData()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "PNG Image (*.png)|*.png|JPEG Image (*.jpeg)|*.jpeg|BMP Image (*.bmp)|*.bmp",
+                DefaultExt = "png",
+                AddExtension = true,
+                FileName = "MyArtwork" // Default file name
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                string baseFilePath = saveFileDialog.FileName;
+                SaveCanvasDelegate?.Invoke(baseFilePath);
+                SaveSprayData(baseFilePath);
+            }
+        }
+
+        private void SaveSprayData(string baseFilePath)
+        {
+            string sprayDataPath = System.IO.Path.ChangeExtension(baseFilePath, ".myspray");
+
+            var sprayDotsDto = PaintDots.Select(dot => new SprayPaintDetail
+            {
+                X = Canvas.GetLeft(dot),
+                Y = Canvas.GetTop(dot),
+                Width = dot.Width,
+                Height = dot.Height,
+                Color = (dot.Fill as SolidColorBrush)?.Color.ToString()
+            }).ToList();
+
+            var sprayDataJson = JsonConvert.SerializeObject(sprayDotsDto);
+            System.IO.File.WriteAllText(sprayDataPath, sprayDataJson);
+        }
 
         protected virtual void OnPropertyChanged(string propertyName)
         {

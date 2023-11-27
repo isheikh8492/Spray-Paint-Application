@@ -27,6 +27,7 @@ namespace Spray_Paint_Application.View
             var viewModel = new EditorViewModel();
             viewModel.Initialize(imageData);
             DataContext = viewModel;
+            viewModel.SprayViewModel.SaveCanvasDelegate = SaveCanvasAsImage;
         }
 
         private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
@@ -66,5 +67,38 @@ namespace Spray_Paint_Application.View
                 paintCanvas.Clip = new RectangleGeometry(new Rect(0, 0, image.ActualWidth, image.ActualHeight));
             }
         }
+
+        private void SaveCanvasAsImage(string imagePath)
+        {
+            // Assuming that ImageData.Photo holds the original image
+            var bitmapImage = ((EditorViewModel)DataContext).LoginViewModel.ImageData.Photo;
+
+            // Create a new BitmapEncoder based on the file extension
+            BitmapEncoder encoder = GetEncoder(imagePath);
+
+            // Create a frame from the BitmapImage and add to the encoder
+            encoder.Frames.Add(BitmapFrame.Create((BitmapSource)bitmapImage));
+
+            // Save the file
+            using (var fileStream = System.IO.File.Create(imagePath))
+            {
+                encoder.Save(fileStream);
+            }
+        }
+
+        private BitmapEncoder GetEncoder(string imagePath)
+        {
+            string extension = System.IO.Path.GetExtension(imagePath).ToLower();
+            switch (extension)
+            {
+                case ".jpeg":
+                    return new JpegBitmapEncoder();
+                case ".bmp":
+                    return new BmpBitmapEncoder();
+                default:
+                    return new PngBitmapEncoder();
+            }
+        }
+
     }
 }

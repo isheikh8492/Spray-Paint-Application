@@ -28,7 +28,8 @@
                 <MenuItem Header="File" Padding="10 5">
                     <MenuItem Header="New" />
                     <MenuItem Header="Open" />
-                    <MenuItem Header="Save As" />
+                    <MenuItem Header="Save As" 
+          Command="{Binding SprayViewModel.SaveImageAndSprayDataCommand}" />
                 </MenuItem>
 
                 <MenuItem Header="View" Padding="10 5">
