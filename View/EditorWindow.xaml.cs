@@ -69,7 +69,7 @@ namespace Spray_Paint_Application.View
         private void SaveCanvasAsImage(string imagePath)
         {
             // Assuming that ImageData.Photo holds the original image
-            var bitmapImage = ((EditorViewModel)DataContext).LoginViewModel.ImageData.Photo;
+            var bitmapImage = ((EditorViewModel)DataContext).SelectViewModel.ImageData.Photo;
 
             // Create a new BitmapEncoder based on the file extension
             BitmapEncoder encoder = GetEncoder(imagePath);

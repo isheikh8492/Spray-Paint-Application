@@ -26,19 +26,19 @@
         <DockPanel LastChildFill="True" Grid.Row="0">
             <Menu DockPanel.Dock="Top" Background="LightGray" Padding="5,5">
                 <MenuItem Header="File" Padding="10 5">
-                    <MenuItem Header="New" />
                     <MenuItem Header="Open" />
                     <MenuItem Header="Save As" 
           Command="{Binding SprayViewModel.SaveImageAndSprayDataCommand}" />
                 </MenuItem>
 
-                <MenuItem Header="View" Padding="10 5">
+                <!--<MenuItem Header="View" Padding="10 5">
                     <MenuItem Header="Zoom In" />
                     <MenuItem Header="Zoom Out" />
-                    <!-- Other View commands -->
-                </MenuItem>
+                    --><!-- Other View commands --><!--
+                </MenuItem>-->
                 <Separator Style="{StaticResource VerticalMenuSeparatorStyle}" />
-                <MenuItem Width="24" Padding="10,5" Margin="2.5,0">
+                <MenuItem Width="24" Padding="10,5" Margin="2.5,0" 
+                          Command="{Binding SprayViewModel.SaveImageAndSprayDataCommand}">
                     <MenuItem.Icon>
                         <Image Source="pack://application:,,,/Resource/save.ico" />
                     </MenuItem.Icon>
@@ -116,7 +116,7 @@
                     <!-- Bind Image to LoginViewModel's ImageData -->
                     <Image Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Canvas}}"
                            Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Canvas}}"
-                           Source="{Binding LoginViewModel.ImageData.Photo}"
+                           Source="{Binding SelectViewModel.ImageData.Photo}"
                            Stretch="Uniform"
                            Loaded="EditableImage_Loaded" />
 
