@@ -148,25 +148,5 @@ namespace Spray_Paint_Application.ViewModel
             var loginWindow = Application.Current.Windows.OfType<LoginView>().FirstOrDefault();
             loginWindow?.Close();
         }
-
-        private Shape ConvertDtoToShape(SprayPaintDetail detail)
-        {
-            var shape = new Rectangle
-            {
-                Width = detail.Width,
-                Height = detail.Height,
-                Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(detail.Color))
-            };
-
-            Canvas.SetLeft(shape, detail.X);
-            Canvas.SetTop(shape, detail.Y);
-
-            return shape;
-        }
-
-        private Boolean CanOpenEditor()
-        {
-            return ImageData.Photo != null;
-        }
     }
 }
