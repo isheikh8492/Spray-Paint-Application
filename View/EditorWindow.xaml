@@ -114,6 +114,7 @@
         <Grid Grid.Row="1" Background="LightGray">
             <Viewbox Stretch="Uniform" Margin="10">
                 <Canvas x:Name="paintCanvas" Width="1024" Height="591" Background="Transparent"
+                        MouseEnter="Canvas_MouseEnter" MouseLeave="Canvas_MouseLeave"
                         MouseDown="Canvas_MouseDown" MouseMove="Canvas_MouseMove" MouseUp="Canvas_MouseUp">
                     <!-- Bind Image to LoginViewModel's ImageData -->
                     <Image Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Canvas}}"

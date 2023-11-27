@@ -2,6 +2,7 @@
 using Spray_Paint_Application.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Resources;
 using System.Windows.Shapes;
 
 namespace Spray_Paint_Application.View
@@ -53,6 +55,30 @@ namespace Spray_Paint_Application.View
             var editorViewModel = DataContext as EditorViewModel;
             var sprayViewModel = editorViewModel?.SprayViewModel;
             sprayViewModel?.CanvasMouseUpCommand.Execute(position);
+        }
+
+        private void Canvas_MouseEnter(object sender, MouseEventArgs e)
+        {
+            var viewModel = DataContext as EditorViewModel;
+            if (viewModel != null)
+            {
+                if (viewModel.SprayViewModel.ActiveTool == ActiveTool.Paint)
+                {
+                    StreamResourceInfo streamResource = Application.GetResourceStream(new Uri("Resource\\spray.cur", UriKind.Relative));
+                    Cursor = new Cursor(streamResource.Stream);
+
+                }
+                else if (viewModel.SprayViewModel.ActiveTool == ActiveTool.Erase)
+                {
+                    StreamResourceInfo streamResource = Application.GetResourceStream(new Uri("Resource\\eraser.cur", UriKind.Relative));
+                    Cursor = new Cursor(streamResource.Stream);
+                }
+            }
+        }
+
+        private void Canvas_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.Arrow; // Set back to default cursor
         }
 
         private void EditableImage_Loaded(object sender, RoutedEventArgs e)
