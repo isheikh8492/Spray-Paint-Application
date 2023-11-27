@@ -60,14 +60,19 @@
             <StackPanel Orientation="Horizontal" Background="#333333">
                 <!-- Tools Section -->
                 <StackPanel Orientation="Vertical" Margin="10">
-                    <Button Padding="5" Margin="5" ToolTip="Spray Paint" Background="Transparent" Width="32" Height="32">
+                    <ToggleButton Padding="5" Margin="5" ToolTip="Spray Paint" 
+                  IsChecked="{Binding SprayViewModel.IsPaintActive, Mode=OneWay}"
+                  Command="{Binding SprayViewModel.ActivatePaintCommand}">
                         <Image Source="pack://application:,,,/Resources/spray_icon.ico" Height="32" Width="32"
-                               HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" />
-                    </Button>
-                    <Button Padding="5" Margin="5" ToolTip="Eraser" Background="Transparent" Width="32" Height="32">
+               HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" />
+                    </ToggleButton>
+                    <ToggleButton Padding="5" Margin="5" ToolTip="Eraser" 
+                  IsChecked="{Binding SprayViewModel.IsEraserActive, Mode=OneWay}"
+                  Command="{Binding SprayViewModel.ActivateEraserCommand}">
                         <Image Source="pack://application:,,,/Resources/eraser_icon.ico" Height="32" Width="32"
-                               HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Button>
+               HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" />
+                    </ToggleButton>
+
                     <TextBlock Text="Tools" Margin="5" Foreground="White" FontWeight="Normal" TextAlignment="Center"
                                HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </StackPanel>

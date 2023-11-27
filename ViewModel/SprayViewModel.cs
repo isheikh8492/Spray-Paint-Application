@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -13,6 +14,12 @@ using System.Windows.Threading;
 
 namespace Spray_Paint_Application.ViewModel
 {
+    public enum ActiveTool
+    {
+        Paint,
+        Erase
+    }
+
     public class SprayViewModel : INotifyPropertyChanged
     {
         private HistoryManager _historyManager = new HistoryManager();
@@ -26,10 +33,31 @@ namespace Spray_Paint_Application.ViewModel
         public ICommand CanvasMouseUpCommand { get; }
         public ICommand UndoCommand { get; }
         public ICommand RedoCommand { get; }
+        public ICommand EraserCommand { get; private set; }
 
         private SolidColorBrush _paintColor = Brushes.Black;
         private int _brushSize = 10; // Default value
         private int _brushDensity = 10; // Default value
+
+        private ActiveTool _activeTool = ActiveTool.Paint;
+        public ActiveTool ActiveTool
+        {
+            get => _activeTool;
+            set
+            {
+                _activeTool = value;
+                OnPropertyChanged(nameof(ActiveTool));
+                OnPropertyChanged(nameof(IsPaintActive));
+                OnPropertyChanged(nameof(IsEraserActive));
+            }
+        }
+
+        public bool IsPaintActive => ActiveTool == ActiveTool.Paint;
+        public bool IsEraserActive => ActiveTool == ActiveTool.Erase;
+
+        public ICommand ActivatePaintCommand { get; }
+        public ICommand ActivateEraserCommand { get; }
+
         public SolidColorBrush PaintColor
         {
             get => _paintColor;
@@ -81,6 +109,9 @@ namespace Spray_Paint_Application.ViewModel
             CanvasMouseUpCommand = new RelayCommand<Point>(CanvasMouseUp);
             UndoCommand = new RelayCommand(PerformUndo, CanPerformUndo);
             RedoCommand = new RelayCommand(PerformRedo, CanPerformRedo);
+            EraserCommand = new RelayCommand<Point>(ErasePaint);
+            ActivatePaintCommand = new RelayCommand(() => ActiveTool = ActiveTool.Paint);
+            ActivateEraserCommand = new RelayCommand(() => ActiveTool = ActiveTool.Erase);
         }
 
         private bool CanPerformUndo()
@@ -130,18 +161,42 @@ namespace Spray_Paint_Application.ViewModel
         {
             _isPainting = true;
             _currentPosition = position;
-            _sprayTimer.Start();
+            if (IsEraserActive)
+            {
+                ErasePaint(position);
+            }
+            else
+            {
+                _sprayTimer.Start();
+            }
         }
 
         private void CanvasMouseMove(Point position)
         {
+            if (!_isPainting) return;
+
             _currentPosition = position;
+            if (IsEraserActive)
+            {
+                ErasePaint(position);
+            }
+            else
+            {
+                SprayPaint(position);
+            }
         }
 
         private void CanvasMouseUp(Point position)
         {
             _isPainting = false;
-            _sprayTimer.Stop();
+            if (IsEraserActive)
+            {
+                ErasePaint(position);
+            }
+            else
+            {
+                _sprayTimer.Stop();
+            }
         }
 
         private void SprayPaint(Point position)
@@ -186,6 +241,45 @@ namespace Spray_Paint_Application.ViewModel
                 IsAddition = true
             });
         }
+
+        public void ErasePaint(Point position)
+        {
+            if (!_isPainting) return;
+
+            const double eraserWidth = 20.0; // Width of the eraser area
+            const double eraserHeight = 20.0; // Height of the eraser area
+
+            // Calculate the top-left corner of the eraser area
+            double eraserLeft = position.X - eraserWidth / 2;
+            double eraserTop = position.Y - eraserHeight / 2;
+
+            var dotsToErase = PaintDots
+                .OfType<Rectangle>()
+                .Where(rect =>
+                    Canvas.GetLeft(rect) >= eraserLeft &&
+                    Canvas.GetLeft(rect) <= eraserLeft + eraserWidth &&
+                    Canvas.GetTop(rect) >= eraserTop &&
+                    Canvas.GetTop(rect) <= eraserTop + eraserHeight)
+                .ToList();
+
+            var shapesToErase = dotsToErase.Cast<Shape>().ToList();
+
+            foreach (var dot in dotsToErase)
+            {
+                Application.Current.Dispatcher.Invoke(() => PaintDots.Remove(dot));
+            }
+
+            // Record the eraser action for undo/redo
+            if (shapesToErase.Any())
+            {
+                _historyManager.AddAction(new HistoryAction
+                {
+                    Shapes = shapesToErase,
+                    IsAddition = false
+                });
+            }
+        }
+
 
         protected virtual void OnPropertyChanged(string propertyName)
         {

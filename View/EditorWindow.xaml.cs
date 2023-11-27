@@ -25,15 +25,13 @@ namespace Spray_Paint_Application.View
         {
             InitializeComponent();
             var viewModel = new EditorViewModel();
-            viewModel.Initialize(imageData); // Make sure imageData is not null
+            viewModel.Initialize(imageData);
             DataContext = viewModel;
         }
-
 
         private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var position = e.GetPosition(paintCanvas);
-            // Retrieve SprayViewModel from the DataContext which is an instance of EditorViewModel
             var editorViewModel = DataContext as EditorViewModel;
             var sprayViewModel = editorViewModel?.SprayViewModel;
             sprayViewModel?.CanvasMouseDownCommand.Execute(position);
@@ -44,13 +42,11 @@ namespace Spray_Paint_Application.View
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 var position = e.GetPosition(paintCanvas);
-                // Retrieve SprayViewModel from the DataContext which is an instance of EditorViewModel
                 var editorViewModel = DataContext as EditorViewModel;
                 var sprayViewModel = editorViewModel?.SprayViewModel;
                 sprayViewModel?.CanvasMouseMoveCommand.Execute(position);
             }
         }
-
 
         private void Canvas_MouseUp(object sender, MouseButtonEventArgs e)
         {
