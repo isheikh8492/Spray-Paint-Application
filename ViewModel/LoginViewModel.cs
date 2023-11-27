@@ -24,6 +24,7 @@ namespace Spray_Paint_Application.ViewModel
     public class LoginViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
+        public event EventHandler SprayDataLoaded;
         public ObservableCollection<Shape> PaintDots { get; } = new ObservableCollection<Shape>();
 
         private ImageModel _imageData = new ImageModel();
@@ -100,7 +101,6 @@ namespace Spray_Paint_Application.ViewModel
         public LoginViewModel()
         {
             LoadImageCommand = new RelayCommand(LoadImage);
-            OpenEditorCommand = new RelayCommand(OpenEditor, () => CanOpenEditor()); 
         }
 
         protected virtual void OnPropertyChanged(string propertyName)
@@ -120,31 +120,33 @@ namespace Spray_Paint_Application.ViewModel
                 ImageData.Photo = bitmap;
                 ImageBorderVisibility = Visibility.Visible;
 
-                // Check for corresponding .myspray file
-                string sprayFilePath = System.IO.Path.ChangeExtension(openFileDialog.FileName, ".myspray");
-                if (File.Exists(sprayFilePath))
-                {
-                    LoadSprayData(sprayFilePath);
-                }
-            } else
+                // Open EditorWindow with the selected image
+                OpenEditorWithImage(openFileDialog.FileName);
+            }
+            else
             {
                 ImageBorderVisibility = Visibility.Collapsed;
             }
-            (OpenEditorCommand as RelayCommand)?.RaiseCanExecuteChanged();
         }
 
-        public void LoadSprayData(string filePath)
+        private void OpenEditorWithImage(string imagePath)
         {
-            var sprayDataJson = File.ReadAllText(filePath);
-            var sprayDataDto = JsonConvert.DeserializeObject<ObservableCollection<SprayPaintDetail>>(sprayDataJson);
+            var editorViewModel = new EditorViewModel();
+            editorViewModel.Initialize(new ImageModel { Photo = ImageData.Photo });
 
-            // Convert DTOs back to Shape objects
-            PaintDots.Clear();
-            foreach (var dotDetail in sprayDataDto)
+            // Check for corresponding .myspray file
+            string sprayFilePath = System.IO.Path.ChangeExtension(imagePath, ".myspray");
+            if (File.Exists(sprayFilePath))
             {
-                var dot = ConvertDtoToShape(dotDetail);
-                PaintDots.Add(dot);
+                editorViewModel.SprayViewModel.LoadSprayData(sprayFilePath);
             }
+
+            EditorWindow editorWindow = new EditorWindow(editorViewModel);
+            editorWindow.Show();
+
+            // Optionally, close the current LoginView window if required
+            var loginWindow = Application.Current.Windows.OfType<LoginView>().FirstOrDefault();
+            loginWindow?.Close();
         }
 
         private Shape ConvertDtoToShape(SprayPaintDetail detail)
@@ -165,22 +167,6 @@ namespace Spray_Paint_Application.ViewModel
         private Boolean CanOpenEditor()
         {
             return ImageData.Photo != null;
-        }
-
-        private void OpenEditor()
-        {
-            if (ImageData.Photo != null)
-            {
-                var loginWindow = Application.Current.Windows.OfType<LoginView>().FirstOrDefault();
-                EditorWindow editorWindow = new EditorWindow(this.ImageData);
-                loginWindow?.Close();
-                editorWindow.Show();
-            }
-            else
-            {
-                MessageBox.Show("Please load image before continuing.", "Loading Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
         }
     }
 }

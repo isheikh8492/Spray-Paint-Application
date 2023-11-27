@@ -24,7 +24,8 @@ namespace Spray_Paint_Application.View
         public LoginView()
         {
             InitializeComponent();
-            DataContext = new LoginViewModel();
+            var viewModel = new LoginViewModel();
+            DataContext = viewModel;
         }
     }
 }

@@ -21,11 +21,9 @@ namespace Spray_Paint_Application.View
     /// </summary>
     public partial class EditorWindow : Window
     {
-        public EditorWindow(ImageModel imageData)
+        public EditorWindow(EditorViewModel viewModel)
         {
             InitializeComponent();
-            var viewModel = new EditorViewModel();
-            viewModel.Initialize(imageData);
             DataContext = viewModel;
             viewModel.SprayViewModel.SaveCanvasDelegate = SaveCanvasAsImage;
         }
@@ -97,6 +95,25 @@ namespace Spray_Paint_Application.View
                     return new BmpBitmapEncoder();
                 default:
                     return new PngBitmapEncoder();
+            }
+        }
+
+        private void OnSprayDataLoaded(object sender, EventArgs e)
+        {
+            if (DataContext is LoginViewModel viewModel)
+            {
+                // Clear existing dots
+                var existingDots = paintCanvas.Children.OfType<Shape>().ToList();
+                foreach (var dot in existingDots)
+                {
+                    paintCanvas.Children.Remove(dot);
+                }
+
+                // Add new dots
+                foreach (var dot in viewModel.PaintDots)
+                {
+                    paintCanvas.Children.Add(dot);
+                }
             }
         }
 

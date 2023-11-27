@@ -320,8 +320,37 @@ namespace Spray_Paint_Application.ViewModel
             }).ToList();
 
             var sprayDataJson = JsonConvert.SerializeObject(sprayDotsDto);
-            System.IO.File.WriteAllText(sprayDataPath, sprayDataJson);
+            File.WriteAllText(sprayDataPath, sprayDataJson);
         }
+
+        public void LoadSprayData(string filePath)
+        {
+            var sprayDataJson = File.ReadAllText(filePath);
+            var sprayDataDto = JsonConvert.DeserializeObject<ObservableCollection<SprayPaintDetail>>(sprayDataJson);
+
+            PaintDots.Clear();
+            foreach (var dotDetail in sprayDataDto)
+            {
+                var dot = ConvertDtoToShape(dotDetail);
+                PaintDots.Add(dot);
+            }
+        }
+
+        private Shape ConvertDtoToShape(SprayPaintDetail detail)
+        {
+            var shape = new Rectangle
+            {
+                Width = detail.Width,
+                Height = detail.Height,
+                Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(detail.Color))
+            };
+
+            Canvas.SetLeft(shape, detail.X);
+            Canvas.SetTop(shape, detail.Y);
+
+            return shape;
+        }
+
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
