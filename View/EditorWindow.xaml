@@ -10,7 +10,7 @@
         Title="Spray Paint Application" Height="768" Width="1024" 
         WindowState="Maximized"
         
-        Icon="pack://application:,,,/Resources/spray-paint.ico">
+        Icon="pack://application:,,,/Resource/spray-paint.ico">
 
     <Window.InputBindings>
         <KeyBinding Command="{Binding SprayViewModel.UndoCommand}" Modifiers="Ctrl" Key="Z" />
@@ -40,20 +40,20 @@
                 <Separator Style="{StaticResource VerticalMenuSeparatorStyle}" />
                 <MenuItem Width="24" Padding="10,5" Margin="2.5,0">
                     <MenuItem.Icon>
-                        <Image Source="pack://application:,,,/Resources/save.ico" />
+                        <Image Source="pack://application:,,,/Resource/save.ico" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator Style="{StaticResource VerticalMenuSeparatorStyle}" />
                 <MenuItem Width="24" Padding="10,5" Margin="2.5,0"
                           Command="{Binding SprayViewModel.UndoCommand}">
                     <MenuItem.Icon>
-                        <Image Source="pack://application:,,,/Resources/undoarrow.ico" />
+                        <Image Source="pack://application:,,,/Resource/undoarrow.ico" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Width="24" Padding="10,5" Margin="2.5,0" 
                           Command="{Binding SprayViewModel.RedoCommand}">
                     <MenuItem.Icon>
-                        <Image Source="pack://application:,,,/Resources/redoarrow.ico" />
+                        <Image Source="pack://application:,,,/Resource/redoarrow.ico" />
                     </MenuItem.Icon>
                 </MenuItem>
             </Menu>
@@ -64,13 +64,13 @@
                     <ToggleButton Padding="5" Margin="5" ToolTip="Spray Paint" 
                   IsChecked="{Binding SprayViewModel.IsPaintActive, Mode=OneWay}"
                   Command="{Binding SprayViewModel.ActivatePaintCommand}">
-                        <Image Source="pack://application:,,,/Resources/spray_icon.ico" Height="32" Width="32"
+                        <Image Source="pack://application:,,,/Resource/spray_icon.ico" Height="32" Width="32"
                HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" />
                     </ToggleButton>
                     <ToggleButton Padding="5" Margin="5" ToolTip="Eraser" 
                   IsChecked="{Binding SprayViewModel.IsEraserActive, Mode=OneWay}"
                   Command="{Binding SprayViewModel.ActivateEraserCommand}">
-                        <Image Source="pack://application:,,,/Resources/eraser_icon.ico" Height="32" Width="32"
+                        <Image Source="pack://application:,,,/Resource/eraser_icon.ico" Height="32" Width="32"
                HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" />
                     </ToggleButton>
 

@@ -9,12 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\eraser_icon.ico" />
-    <None Remove="Resources\redoarrow.ico" />
-    <None Remove="Resources\save.ico" />
-    <None Remove="Resources\spray-paint.ico" />
-    <None Remove="Resources\spray_icon.ico" />
-    <None Remove="Resources\undoarrow.ico" />
+    <None Remove="Resource\eraser_icon.ico" />
+    <None Remove="Resource\redoarrow.ico" />
+    <None Remove="Resource\save.ico" />
+    <None Remove="Resource\spray-paint.ico" />
+    <None Remove="Resource\spray_icon.ico" />
+    <None Remove="Resource\undoarrow.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,12 +29,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\eraser_icon.ico" />
-    <Resource Include="Resources\redoarrow.ico" />
-    <Resource Include="Resources\save.ico" />
-    <Resource Include="Resources\spray-paint.ico" />
-    <Resource Include="Resources\spray_icon.ico" />
-    <Resource Include="Resources\undoarrow.ico" />
+    <Resource Include="Resource\eraser_icon.ico" />
+    <Resource Include="Resource\redoarrow.ico" />
+    <Resource Include="Resource\save.ico" />
+    <Resource Include="Resource\spray-paint.ico" />
+    <Resource Include="Resource\spray_icon.ico" />
+    <Resource Include="Resource\undoarrow.ico" />
   </ItemGroup>
 
 </Project>

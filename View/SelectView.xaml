@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Spray_Paint_Application.ViewModel"
         mc:Ignorable="d" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Icon="pack://application:,,,/Resources/spray-paint.ico"
+        Icon="pack://application:,,,/Resource/spray-paint.ico"
         Title="Spray Paint Application" Height="150" Width="225">
 
     <Grid Background="LightGray">
