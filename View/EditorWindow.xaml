@@ -15,6 +15,8 @@
     <Window.InputBindings>
         <KeyBinding Command="{Binding SprayViewModel.UndoCommand}" Modifiers="Ctrl" Key="Z" />
         <KeyBinding Command="{Binding SprayViewModel.RedoCommand}" Modifiers="Ctrl" Key="Y" />
+        <KeyBinding Command="{Binding SprayViewModel.SaveImageAndSprayDataCommand}" 
+                    Modifiers="Ctrl" Key="S" />
     </Window.InputBindings>
 
     <Grid>
