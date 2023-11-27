@@ -21,7 +21,7 @@ using System.Windows.Shapes;
 
 namespace Spray_Paint_Application.ViewModel
 {
-    public class LoginViewModel : INotifyPropertyChanged
+    public class SelectViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         public event EventHandler SprayDataLoaded;
@@ -98,7 +98,7 @@ namespace Spray_Paint_Application.ViewModel
         public ICommand LoadImageCommand { get; }
         public ICommand OpenEditorCommand { get; }
 
-        public LoginViewModel()
+        public SelectViewModel()
         {
             LoadImageCommand = new RelayCommand(LoadImage);
         }
@@ -144,8 +144,8 @@ namespace Spray_Paint_Application.ViewModel
             EditorWindow editorWindow = new EditorWindow(editorViewModel);
             editorWindow.Show();
 
-            // Optionally, close the current LoginView window if required
-            var loginWindow = Application.Current.Windows.OfType<LoginView>().FirstOrDefault();
+            // Optionally, close the current SelectView window if required
+            var loginWindow = Application.Current.Windows.OfType<SelectView>().FirstOrDefault();
             loginWindow?.Close();
         }
     }

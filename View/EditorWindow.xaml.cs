@@ -100,7 +100,7 @@ namespace Spray_Paint_Application.View
 
         private void OnSprayDataLoaded(object sender, EventArgs e)
         {
-            if (DataContext is LoginViewModel viewModel)
+            if (DataContext is SelectViewModel viewModel)
             {
                 // Clear existing dots
                 var existingDots = paintCanvas.Children.OfType<Shape>().ToList();

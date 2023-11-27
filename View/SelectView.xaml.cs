@@ -17,14 +17,14 @@ using System.Windows.Shapes;
 namespace Spray_Paint_Application.View
 {
     /// <summary>
-    /// Interaction logic for LoginView.xaml
+    /// Interaction logic for SelectView.xaml
     /// </summary>
-    public partial class LoginView : Window
+    public partial class SelectView : Window
     {
-        public LoginView()
+        public SelectView()
         {
             InitializeComponent();
-            var viewModel = new LoginViewModel();
+            var viewModel = new SelectViewModel();
             DataContext = viewModel;
         }
     }

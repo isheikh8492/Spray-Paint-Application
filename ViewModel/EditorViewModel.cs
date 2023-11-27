@@ -11,12 +11,12 @@ namespace Spray_Paint_Application.ViewModel
     public class EditorViewModel
     {
         public SprayViewModel SprayViewModel { get; }
-        public LoginViewModel LoginViewModel { get; }
+        public SelectViewModel LoginViewModel { get; }
 
         public EditorViewModel()
         {
             SprayViewModel = new SprayViewModel();
-            LoginViewModel = new LoginViewModel();
+            LoginViewModel = new SelectViewModel();
         }
 
         public void Initialize(ImageModel imageData)
