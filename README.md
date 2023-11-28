@@ -56,6 +56,24 @@ Contributions to the Spray Paint Application are welcome. Please follow these st
 4. Push to the branch (`git push origin feature/fooBar`).
 5. Create a new Pull Request.
 
+## References
+
+The development of this application was supported by a variety of resources:
+
+- **Microsoft .NET Documentation**: Essential for understanding WPF and .NET Framework, offering detailed guides and API references.
+- **YouTube Tutorials**: Various channels provided step-by-step instructions, particularly useful for tackling complex issues visually.
+- **ChatGPT by OpenAI**: Assisted in code debugging, logic development, and quick programming-related queries.
+- **Stack Overflow**: A crucial platform for resolving coding challenges and learning best practices from a vast developer community.
+- **Syncfusion WPF Controls Documentation**: Offered insights into advanced UI elements, including their properties and event handling.
+- **GitHub Repositories**: Open-source projects and code examples inspired certain features and demonstrated industry-standard practices.
+- **Bing Search Engine**: Used for quick searches on documentation, coding tips, and community forums.
+- **Pluralsight and Udemy Courses**: Online courses provided structured learning paths for WPF and .NET development.
+- **Microsoft Developer Network (MSDN) Forums**: A valuable source of information and community support for Microsoft technologies.
+- **Visual Studio Documentation**: For understanding the IDE’s features, debugging tools, and best practices.
+- **CodeProject Articles**: Offered in-depth tutorials and discussions on specific WPF topics and challenges.
+- **Reddit Programming Communities**: Subreddits like r/learnprogramming and r/csharp were helpful for advice and community experiences.
+- **Medium and Dev.to Blogs**: Technology blogs provided insights into real-world applications and emerging trends in software development.
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE.txt).
