@@ -21,7 +21,7 @@
 
             <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="Please select an image to edit" 
                    Margin="0,32,0,0" TextAlignment="Center" VerticalAlignment="Top"/>
-            <Button Grid.Row="1" x:Name="LoadImageButton" Content="Load Image" HorizontalAlignment="Center" 
+            <Button Grid.Row="1" x:Name="LoadImageButton" Content="Open Image" HorizontalAlignment="Center" 
                 Width="100" Margin="0,29,0,0" Command="{Binding LoadImageCommand}" VerticalAlignment="Top" />
         </Grid>
     </Grid>
