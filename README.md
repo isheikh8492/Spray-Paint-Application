@@ -51,4 +51,4 @@ This project is licensed under the [MIT License](LICENSE.txt).
 
 ## Contact
 
-For support or queries, please contact us at [email@example.com](mailto:email@example.com).
+For support or queries, please contact me at [isheikh@hawk.iit.edu](mailto:isheikh@hawk.iit.edu).
