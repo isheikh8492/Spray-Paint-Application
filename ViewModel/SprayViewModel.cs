@@ -254,8 +254,9 @@ namespace Spray_Paint_Application.ViewModel
         {
             if (!_isPainting) return;
 
-            const double eraserWidth = 20.0; // Width of the eraser area
-            const double eraserHeight = 20.0; // Height of the eraser area
+            // Use BrushSize for eraserWidth and eraserHeight
+            double eraserWidth = BrushSize;
+            double eraserHeight = BrushSize;
 
             // Calculate the top-left corner of the eraser area
             double eraserLeft = position.X - eraserWidth / 2;
