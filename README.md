@@ -29,11 +29,22 @@ git clone https://github.com/isheikh8492/Spray-Paint-Application.git
 
 Once the application is running:
 
-1. **Load an Image**: Click on `Open Image` to import an image onto the canvas.
+1. **Load an Image**: Click on `Load Image` to import an image onto the canvas.
 2. **Choose a Tool**: Select either the spray paint or eraser tool from the tool panel.
 3. **Adjust Settings**: Use the sliders to change the brush size, opacity, and color.
 4. **Paint**: Click and drag on the canvas to paint or erase.
-5. **Save**: Save your artwork or session using the `File` menu.
+5. **Save**: Save your artwork or session using the `File` menu or by clicking the cassette icon on the toolbar to the right of the `File` menu icon.
+
+### Keyboard Shortcuts
+
+- **Undo**: `Ctrl + Z`
+- **Redo**: `Ctrl + Y`
+- **Save**: `Ctrl + S` (This will trigger the save process, prompting you to save your artwork and session data.)
+
+### Additional Saving Options
+
+Next to the `File` menu on the top toolbar, you can find a cassette icon that allows quick saving of your work. Simply click on this icon, and your 
+artwork will be saved using your previously chosen settings and file path.
 
 ## Contributing
 
