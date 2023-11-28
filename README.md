@@ -19,7 +19,7 @@ To set up the Spray Paint Application on your local machine, follow these steps:
 
 1. Clone the repository:
 ```
-git clone https://your-repository-url.git
+git clone https://github.com/isheikh8492/Spray-Paint-Application.git
 ```
 2. Navigate to the cloned directory.
 3. Open the solution file `SprayPaintApplication.sln` in Visual Studio.
